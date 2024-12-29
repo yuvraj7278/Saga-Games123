@@ -6,7 +6,181 @@
     <title>GameHub - Your Gaming Platform</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Your existing styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #1e1e2f, #1c1c1c);
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+        header {
+            background: #282c34;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #61dafb;
+            cursor: pointer;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav ul li a:hover {
+            background: #61dafb;
+            color: #282c34;
+        }
+        section {
+            padding: 50px;
+            text-align: center;
+        }
+        #home {
+            background: url('background.jpg') no-repeat center center/cover;
+            color: #fff;
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #home h1 {
+            font-size: 3em;
+            margin: 0;
+            animation: fadeIn 1s ease-in;
+        }
+        #home p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            animation: fadeIn 2s ease-in;
+        }
+        #home button {
+            background: #61dafb;
+            color: #282c34;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            animation: fadeIn 3s ease-in;
+        }
+        #home button:hover {
+            background: #21a1f1;
+        }
+        #games {
+            background: #1e1e2f;
+            padding: 50px 20px;
+        }
+        #games h2 {
+            margin-bottom: 20px;
+            animation: slideIn 1s ease-out;
+        }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .game {
+            background: #282c34;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .game:hover {
+            transform: translateY(-10px);
+        }
+        .game img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        #upload {
+            background: linear-gradient(120deg, #1c1c1c, #1e1e2f);
+            padding: 50px 20px;
+        }
+        #upload form {
+            background: #282c34;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #upload form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        #upload form input, #upload form textarea, #upload form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+        #upload form button {
+            background: #61dafb;
+            color: #282c34;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #upload form button:hover {
+            background: #21a1f1;
+        }
+        #discord {
+            background: #1e1e2f;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        #discord a {
+            color: #61dafb;
+            font-size: 1.2em;
+            text-decoration: none;
+            background: #282c34;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+            display: inline-block;
+            margin: 20px auto;
+        }
+        #discord a:hover {
+            background: #21a1f1;
+        }
+        footer {
+            background: #282c34;
+            padding: 20px;
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -31,14 +205,34 @@
 
     <section id="games">
         <h2>Featured Games</h2>
-        <div class="game-grid" id="game-list">
-            <!-- Games will be loaded dynamically -->
+        <div class="game-grid">
+            <div class="game">
+                <img src="game1.jpg" alt="Game 1">
+                <h3>Game Title 1</h3>
+                <p>Short description of the game.</p>
+            </div>
+            <div class="game">
+                <img src="game2.jpg" alt="Game 2">
+                <h3>Game Title 2</h3>
+                <p>Short description of the game.</p>
+            </div>
         </div>
     </section>
 
     <section id="upload">
         <h2>Upload Your Game</h2>
-        <p>Game uploads are currently not supported on this platform. Please <a href="https://example.com/upload" target="_blank">upload here</a>.</p>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="game-title">Game Title:</label>
+            <input type="text" id="game-title" name="game-title" required>
+
+            <label for="game-file">Upload Game File:</label>
+            <input type="file" id="game-file" name="game-file" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <button type="submit">Upload</button>
+        </form>
     </section>
 
     <section id="discord">
@@ -50,26 +244,5 @@
     <footer>
         <p>&copy; 2024 GameHub. All rights reserved. | Made by <a href="https://discord.gg/EHTVsJ5T" target="_blank" style="color: #61dafb;">Ethereal Discord Server</a></p>
     </footer>
-
-    <script>
-        // Load games dynamically
-        const games = [
-            { title: "Game Title 1", description: "Short description of the game.", image: "game1.jpg", link: "#" },
-            { title: "Game Title 2", description: "Short description of the game.", image: "game2.jpg", link: "#" },
-        ];
-
-        const gameList = document.getElementById('game-list');
-        games.forEach(game => {
-            const gameDiv = document.createElement('div');
-            gameDiv.className = 'game';
-            gameDiv.innerHTML = `
-                <img src="${game.image}" alt="${game.title}">
-                <h3>${game.title}</h3>
-                <p>${game.description}</p>
-                <a href="${game.link}" target="_blank">Play Now</a>
-            `;
-            gameList.appendChild(gameDiv);
-        });
-    </script>
 </body>
 </html>
